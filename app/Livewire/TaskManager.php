@@ -25,7 +25,7 @@ class TaskManager extends Component
 
     public function mount()
     {
-        $this->tasks = Task::where('user_id', auth::id())->get();
+        $this->tasks = Task::where('user_id', auth::id())->orderBy('created_at', 'desc')->get();
         $this->categories = Category::all();
     }
 
@@ -43,7 +43,7 @@ class TaskManager extends Component
             'status' => 'pending',
             'user_id' => auth::id(),
             'category_id' => null,
-'due_date' => !empty($this->dueDate) ? $this->dueDate : null, // Set to null if empty
+            'due_date' => !empty($this->dueDate) ? $this->dueDate : null, // Set to null if empty
         ]);
 
         $this->resetInput();
@@ -76,7 +76,7 @@ class TaskManager extends Component
             'description' => $this->taskDescription,
             'status' => $this->taskStatus,
             'category_id' => $this->category_id,
-'due_date' => !empty($this->dueDate) ? $this->dueDate : null, // Set to null if empty
+            'due_date' => !empty($this->dueDate) ? $this->dueDate : null, // Set to null if empty
         ]);
 
         $this->resetInput();
@@ -85,15 +85,15 @@ class TaskManager extends Component
     public function getFilteredTasksProperty()
 {
     if ($this->filter === 'completed') {
-        return Task::where('user_id', auth::id())->where('status', 'completed')->paginate(3);
+        return Task::where('user_id', auth::id())->where('status', 'completed')->orderBy('created_at', 'desc')->paginate(5);
     } elseif ($this->filter === 'pending') {
-        return Task::where('user_id', auth::id())->where('status', 'pending')->paginate(3);
+        return Task::where('user_id', auth::id())->where('status', 'pending')->orderBy('created_at', 'desc')->paginate(5);
     }
     elseif ($this->filter === 'all') {
-        return Task::withTrashed()->where('user_id', Auth::id())->paginate(3); // Include soft-deleted tasks
+        return Task::withTrashed()->where('user_id', Auth::id())->orderBy('created_at', 'desc')->paginate(5); // Include soft-deleted tasks
     }
 
-    return Task::where('user_id', auth::id())->get(); // Return all tasks
+    return Task::where('user_id', auth::id())->orderBy('created_at', 'desc')->get(); // Return all tasks
 }
 public function updatedFilter()
 {

@@ -2,6 +2,12 @@
 
 This is a TODO list application built with Laravel and Livewire. Follow the instructions below to set up and run the application.
 
+## Technologies Used for the same approach
+
+- **Livewire**: Utilized for dynamic components and real-time updates on the index page, allowing for a seamless user experience without full page reloads.
+- **Laravel Controllers**: Implemented for managing the dashboard page, handling task CRUD operations and ensuring proper routing and data management.
+
+
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)

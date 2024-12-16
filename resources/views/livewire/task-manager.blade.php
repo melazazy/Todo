@@ -1,22 +1,22 @@
-<div class="container mt-4">
+<div>
     <form wire:submit.prevent="{{ $taskId ? 'updateTask' : 'addTask' }}" class="mb-4">
         <div class="row mb-3">
             <div class="col-md-6">
                 <input type="text" wire:model="taskTitle" class="form-control" placeholder="Task Title" required>
             </div>
             <div class="col-md-1 p-0 m-auto">
-                <label for="dueDate" class="form-label">Due Date</label>
+                <label class="" for="dueDate">Due Date</label>
             </div>
             <div class="col-md-3">
                 <input type="date" wire:model="dueDate" class="form-control" id="dueDate" placeholder="Due Date">
             </div>
             <div class="col-md-2">
-                <button class="btn btn-primary w-100" type="submit">{{ $taskId ? 'Update Task' : 'Add Task' }}</button>
+                <button class="btn btn-add w-100" type="submit">{{ $taskId ? 'Update Task' : 'Add Task' }}</button>
             </div>
         </div>
 
         <div class="mb-3">
-            <textarea wire:model="taskDescription" class="form-control" placeholder="Task Description" rows="3"></textarea>
+            <textarea wire:model="taskDescription" class="form-control" placeholder="Task Description"></textarea>
         </div>
 
         @if ($taskId)
@@ -47,12 +47,10 @@
             </select>
         </div>
     </form>
-
-    <!-- Pagination Links -->
-    <div class="mt-4">
-        {{ $this->filteredTasks->links() }}
-    </div>
-
+<!-- Pagination Links -->
+<div class="mt-4">
+    {{ $this->filteredTasks->links() }}
+</div>
     <div class="list-group" id="taskList">
         @foreach($this->filteredTasks as $task)
             <div class="list-group-item task-card d-flex justify-content-between align-items-center {{ $task->trashed() ? 'text-muted' : '' }}" style="{{ $task->trashed() ? 'text-decoration: line-through;' : '' }}">
@@ -63,15 +61,17 @@
                     <small class="text-muted">Due Date: {{ $task->due_date ? $task->due_date->format('Y-m-d') : 'No due date' }}</small>
                 </div>
                 <div>
-                    @if ($task->trashed())
-                        <button class="btn btn-danger btn-sm" wire:click="hardDeleteTask({{ $task->id }})">Delete Permanently</button>
+                    @if ($task->trashed()) <!-- Check if the task is soft-deleted -->
+                    <button class="btn btn-danger btn-sm" wire:click="hardDeleteTask({{ $task->id }})">Delete Permanently</button>
                         <button class="btn btn-success btn-sm" wire:click="restoreTask({{ $task->id }})">Restore</button>
                     @else
                         <button class="btn btn-primary btn-sm" wire:click="editTask({{ $task->id }})">Edit</button>
-                        <button class="btn btn-danger btn-sm" wire:click="deleteTask({{ $task->id }})">Delete</button>
+                        <button class="btn btn-delete btn-sm" wire:click="deleteTask({{ $task->id }})">Delete</button>
                     @endif
                 </div>
             </div>
         @endforeach
+
     </div>
+
 </div>
