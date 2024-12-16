@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .task-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+        .task-card:hover {
+            transform: scale(1.02);
+        }
+        .btn-add {
+            background-color: #28a745;
+            color: white;
+        }
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+        }
+        .btn-add:hover, .btn-delete:hover {
+            opacity: 0.8;
+        }
+        .task-input {
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4" style="color: #007bff;">Your Colorful TODO List</h1>
+        
+        <form id="taskForm" class="mb-4">
+            <div class="input-group">
+                <input type="text" class="form-control task-input" placeholder="Add a new task" aria-label="New task" required>
+                <button class="btn btn-add" type="submit">Add Task</button>
+            </div>
+        </form>
+
+        <div class="list-group" id="taskList">
+            <!-- Example Task Item -->
+            <div class="list-group-item task-card d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="mb-1">Sample Task</h5>
+                    <p class="mb-1">This is a description of the sample task.</p>
+                    <small class="text-muted">Status: Pending</small>
+                </div>
+                <button class="btn btn-delete btn-sm">Delete</button>
+            </div>
+            <!-- More tasks will be added here -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
